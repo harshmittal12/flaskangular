@@ -5,6 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+#MySQL Configuration
 app.config['MYSQL_USER'] = 'sql12348539'
 app.config['MYSQL_PASSWORD'] = 'mKRkbYT1Jf'
 app.config['MYSQL_HOST'] = 'sql12.freemysqlhosting.net'
@@ -15,6 +16,7 @@ mysql = MySQL(app)
 
 CORS(app)
 
+#API to get students by class
 @app.route('/api/students', methods=['GET','POST'])
 def get_students():
     class_name = request.get_json()['class']
@@ -24,6 +26,7 @@ def get_students():
     rv = cur.fetchall()
     return jsonify(rv)
 
+#API to get all the attendance records
 @app.route('/api/attendances', methods=['GET'])
 def get_attendance():
     cur = mysql.connection.cursor()
@@ -31,6 +34,7 @@ def get_attendance():
     rv = cur.fetchall()
     return jsonify(rv)
 
+#API to get attendance by date and class
 @app.route('/api/attendances/by',methods=['POST'])
 def get_attendance_class_date():
     if request.method == 'POST':
@@ -45,6 +49,7 @@ def get_attendance_class_date():
         print(rv)
         return jsonify(rv)
 
+#
 @app.route('/api/attendance/new', methods=['POST'])
 def add_attendance():
 

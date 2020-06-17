@@ -1,0 +1,28 @@
+<form [formGroup]="searchForm" (ngSubmit)="getAttendancesBy(searchForm.value)">
+    
+    <div class="formcontrol">
+        <label>Date </label>
+        <input type="date" formControlName="date">
+
+        <label>Class </label>
+        <input type="text" formControlName="class_name">
+
+        <input type="submit" [disabled]="!searchForm.valid" value="Submit">
+    </div>
+
+</form>
+
+<table id="attendance">
+    <tr>
+      <th *ngFor = "let column of headers">
+        {{column}}
+      </th>
+    </tr>
+  
+    <tr *ngFor = "let row of attendance">
+      <td *ngFor = "let column of headers">
+        {{row[column]}}
+      </td>
+    </tr>
+  
+  </table>
